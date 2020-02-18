@@ -25,8 +25,8 @@ Dot::Dot(int Val, int Square, int Pos_val) {
 
 int GetCurrentSquare(int i, int j);		// Определение номера квадранта таблицы
 int GetSquareComparsion(int Num_of_Square, Dot* dot, Dot** Tab[[]]);	// Сравнение текущего элемента с элементами квадранта
-void GetStringComparsion(int Num_of_String, Dot* dot, Dot** Tab[[]]);
-void GetColumnComparsion(int Num_of_Column, Dot* dot, Dot** Tab[[]]);
+void GetStringComparsion(int i, Dot* dot, Dot** Tab[[]]);		// Сравнение текущего элемента с элементами в его строке
+void GetColumnComparsion(int j, Dot* dot, Dot** Tab[[]]);		// Сравнение текущего элемента с элементами в его столбце
 
 int main()
 {
@@ -66,7 +66,9 @@ int main()
 				cur_sqr = GetCurrentSquare(i, j);
 				test_error = GetSquareComparsion(cur_sqr, &tab[i][j], tab);
 				// Сарвнение значений в строке
+				GetStringComparsion(i, &tab[i][j], tab);
 				// Сравнение значений в столбце
+				GetColumnComparsion(j, &tab[i][j], tab);
 			}
 		}
 	}
@@ -156,10 +158,12 @@ int GetSquareComparsion(int Num_of_Square, Dot* dot, Dot** Tab[[]]) {
 	return 1;
 }
 
-void GetStringComparsion(int Num_of_String, Dot* dot, Dot** Tab[[]]) {
-
+void GetStringComparsion(int i, Dot* dot, Dot** Tab [[]] ) {
+	for (int j = 0; j < N; j++)
+		dot->pos_val[Tab[i][j].val - 1] = 0;
 }
 
-void GetColumnComparsion(int Num_of_Column, Dot* dot, Dot** Tab [[]] ) {
-
+void GetColumnComparsion(int j, Dot* dot, Dot** Tab [[]] ) {
+	for (int i = 0; i < N; i++)
+		dot->pos_val[Tab[i][j].val - 1] = 0;
 }
